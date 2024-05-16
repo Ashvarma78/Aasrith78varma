@@ -1,0 +1,22 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+- intent: request_names
+  examples: |
+    - What is My name.
+    - my name is 
+    - Do you know my name?
+
+- intent: feed_data
+  
+  examples: |
+    - my number is 8919054046 and my email is aasrithv78@gmail.com
+    - Phone: 8919054046, Email: aasrithv78@gmail.com
+    - For calling you can contact to 8919054046 and for email me at aasrithv78@gmail.com

@@ -1,0 +1,72 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+- greet
+- request_names
+- feed_data
+
+entities:
+  - email 
+  - phone-number
+
+forms:
+  name_form:
+    required_slots:
+      - first_name
+      - last_name
+slots:
+  first_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: name_form
+           requested_slot: first_name
+  last_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: name_form
+           requested_slot: last_name
+
+
+  Phone_number:
+    type: text
+    influence_conversation: True
+    mappings:
+      - type: from_entity
+        entity: phone-number 
+ 
+  Mail: 
+    type: any 
+    mappings:
+      - type: from_entity
+        entity: email 
+
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_ask_first_name:
+  - text: What is your first name?
+  utter_ask_last_name:
+  - text: So {first_name}, what is your last name?
+  utter_submit:
+  - text: Ok. Thanks!
+  utter_slots_values:
+  - text: I will remember that your name is {first_name} {last_name}!
+  utter_data:
+  - text: "provide your email and phone number?"
+  
+
+actions:
+# - utter_greet
+# - utter_slots_values
+# - utter_submit
+- action_extract_data
+- action_save_data
